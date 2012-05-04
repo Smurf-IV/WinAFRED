@@ -2,7 +2,7 @@
 // ---------------------------------------------------------------------------------------------------------------
 //  <copyright file="AssemblyInfo.cs" company="Smurf-IV">
 // 
-//  Copyright (C) 2011 Smurf-IV
+//  Copyright (C) 2011-2012 Smurf-IV
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Smurf-IV")]
 [assembly: AssemblyProduct("WinAFRED")]
-[assembly: AssemblyCopyright("Copyright ©  2011")]
+[assembly: AssemblyCopyright("Copyright © Smurf-IV 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -57,5 +57,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("11.12.7.2")]
-[assembly: AssemblyFileVersion("11.12.7.2")]
+[assembly: AssemblyVersion("12.5.10.4")]
+[assembly: AssemblyFileVersion("12.5.10.4")]

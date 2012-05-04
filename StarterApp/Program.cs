@@ -1,8 +1,8 @@
 ﻿#region Copyright (C)
 // ---------------------------------------------------------------------------------------------------------------
-//  <copyright file="AssemblyInfo.cs" company="Smurf-IV">
+//  <copyright file="Program.cs" company="Smurf-IV">
 // 
-//  Copyright (C) 2011 Smurf-IV
+//  Copyright (C) 2011-2012 Smurf-IV
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -25,23 +25,92 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
+using NLog;
 
 namespace StarterApp
 {
    static class Program
    {
+      private static readonly Logger Log = LogManager.GetLogger("Program");
       /// <summary>
       /// The main entry point for the application.
       /// </summary>
       [STAThread]
       static void Main()
       {
-         Application.EnableVisualStyles();
-         Application.SetCompatibleTextRenderingDefault(false);
-         Application.Run(new WinAFRED());
+         try
+         {
+            AppDomain.CurrentDomain.UnhandledException += logUnhandledException;
+         }
+         catch (Exception ex)
+         {
+            try
+            {
+               Log.FatalException("Failed to attach unhandled exception handler...", ex);
+            }
+            catch
+            {
+            }
+         }
+         try
+         {
+            Log.Error("=====================================================================");
+            Log.Error("File Re-opened: Ver :" + Assembly.GetExecutingAssembly().GetName().Version);
+            CheckAndRunSingleApp();
+         }
+         catch (Exception ex)
+         {
+            Log.FatalException("Exception has not been caught by the rest of the application!", ex);
+            MessageBox.Show(ex.Message, "Uncaught Exception - Exiting !");
+         }
+         finally
+         {
+            Log.Error("File Closing");
+            Log.Error("=====================================================================");
+         }
+      }
+
+      private static void CheckAndRunSingleApp()
+      {
+         string MutexName = string.Format("{0} [{1}]", Path.GetFileName(Application.ExecutablePath), Environment.UserName);
+         bool GrantedOwnership;
+         using (Mutex AppUserMutex = new Mutex(true, MutexName, out GrantedOwnership))
+         {
+            if (GrantedOwnership)
+            {
+               Application.EnableVisualStyles();
+               Application.SetCompatibleTextRenderingDefault(false);
+               Application.Run(new WinAFRED());
+            }
+            else
+            {
+               MessageBox.Show(MutexName + " is already running");
+            }
+         }
+      }
+
+      private static void logUnhandledException(object sender, UnhandledExceptionEventArgs e)
+      {
+         try
+         {
+            Log.Fatal("Unhandled exception.\r\n{0}", e.ExceptionObject);
+            Exception ex = e.ExceptionObject as Exception;
+            if (ex != null)
+            {
+               Log.FatalException("Exception details", ex);
+            }
+            else
+            {
+               Log.Fatal("Unexpected exception.");
+            }
+         }
+         catch
+         {
+         }
       }
    }
 }

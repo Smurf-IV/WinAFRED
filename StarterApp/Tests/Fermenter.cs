@@ -1,8 +1,8 @@
 ﻿#region Copyright (C)
 // ---------------------------------------------------------------------------------------------------------------
-//  <copyright file="Loaves.cs" company="Smurf-IV">
+//  <copyright file="Fermenter.cs" company="Smurf-IV">
 // 
-//  Copyright (C) 2011-2012 Smurf-IV
+//  Copyright (C) 2012 Smurf-IV
 // 
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,12 +26,21 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Thirdparty;
 
 namespace StarterApp.Tests
 {
-   class Loaves
+   internal static class Fermenter
    {
+      private static readonly List<TemporaryFile> tempFiles = new List<TemporaryFile>();
+
+      public static void CreateFiles(string targetDirectory, Int64 numberOfFiles)
+      {
+         tempFiles.Clear();
+         for (Int64 i = 1; i <= numberOfFiles; i++)
+         {
+            tempFiles.Add(new TemporaryFile( targetDirectory, string.Format("{0:g8}.tmp",i), true));
+         }
+      }
    }
 }

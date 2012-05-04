@@ -55,23 +55,36 @@
          this.label8 = new System.Windows.Forms.Label();
          this.pooledThreads = new System.Windows.Forms.NumericUpDown();
          this.button1 = new System.Windows.Forms.Button();
-         this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+         this.pictureBox1 = new System.Windows.Forms.PictureBox();
+         this.button3 = new System.Windows.Forms.Button();
+         this.button4 = new System.Windows.Forms.Button();
          this.tabBread = new System.Windows.Forms.TabControl();
          this.tabPage1 = new System.Windows.Forms.TabPage();
          this.label9 = new System.Windows.Forms.Label();
          this.textBox3 = new System.Windows.Forms.TextBox();
          this.tabSlicedBread = new System.Windows.Forms.TabPage();
          this.textBox1 = new System.Windows.Forms.TextBox();
+         this.tabYEAST = new System.Windows.Forms.TabPage();
+         this.label10 = new System.Windows.Forms.Label();
+         this.textBox4 = new System.Windows.Forms.TextBox();
          this.imageTabList = new System.Windows.Forms.ImageList(this.components);
          this.currentProcessing = new System.Windows.Forms.DataGridView();
-         this.IconState = new System.Windows.Forms.DataGridViewImageColumn();
-         this.Process = new System.Windows.Forms.DataGridViewTextBoxColumn();
-         this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+         this.IconStateCol = new System.Windows.Forms.DataGridViewImageColumn();
+         this.ProcessCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+         this.StatusCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
          this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
          this.menuStrip1 = new System.Windows.Forms.MenuStrip();
          this.suggestAScenarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.versionNumberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.pictureBox1 = new System.Windows.Forms.PictureBox();
+         this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.tabFermenter = new System.Windows.Forms.TabPage();
+         this.fileStart = new System.Windows.Forms.Button();
+         this.label11 = new System.Windows.Forms.Label();
+         this.textBox5 = new System.Windows.Forms.TextBox();
+         this.dirStart = new System.Windows.Forms.Button();
+         this.fermenterFiles = new System.Windows.Forms.NumericUpDown();
+         this.fermenterDirectories = new System.Windows.Forms.NumericUpDown();
+         this.label12 = new System.Windows.Forms.Label();
          ((System.ComponentModel.ISupportInitialize)(this.directoryDepth)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.numberOfFiles)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.fileSizeKB)).BeginInit();
@@ -79,13 +92,16 @@
          ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
          this.tabLoaves.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pooledThreads)).BeginInit();
+         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
          this.tabBread.SuspendLayout();
          this.tabPage1.SuspendLayout();
          this.tabSlicedBread.SuspendLayout();
+         this.tabYEAST.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.currentProcessing)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-         this.menuStrip1.SuspendLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+         this.tabFermenter.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.fermenterFiles)).BeginInit();
+         ((System.ComponentModel.ISupportInitialize)(this.fermenterDirectories)).BeginInit();
          this.SuspendLayout();
          // 
          // label1
@@ -101,21 +117,25 @@
          // 
          // targetDirectory
          // 
+         this.errorProvider1.SetError(this.targetDirectory, "Directory does not exist.");
          this.targetDirectory.Location = new System.Drawing.Point(77, 37);
          this.targetDirectory.Name = "targetDirectory";
          this.targetDirectory.Size = new System.Drawing.Size(431, 21);
          this.targetDirectory.TabIndex = 1;
+         this.targetDirectory.Text = "C:\\";
          this.toolTip1.SetToolTip(this.targetDirectory, "What location do you want the tests to run against.");
+         this.targetDirectory.TextChanged += new System.EventHandler(this.targetDirectory_TextChanged);
          // 
          // btnTargetDirectoryChoose
          // 
-         this.btnTargetDirectoryChoose.Location = new System.Drawing.Point(514, 35);
+         this.btnTargetDirectoryChoose.Location = new System.Drawing.Point(524, 35);
          this.btnTargetDirectoryChoose.Name = "btnTargetDirectoryChoose";
          this.btnTargetDirectoryChoose.Size = new System.Drawing.Size(33, 23);
          this.btnTargetDirectoryChoose.TabIndex = 2;
          this.btnTargetDirectoryChoose.Text = "...";
          this.toolTip1.SetToolTip(this.btnTargetDirectoryChoose, "What location do you want the tests to run against.");
          this.btnTargetDirectoryChoose.UseVisualStyleBackColor = true;
+         this.btnTargetDirectoryChoose.Click += new System.EventHandler(this.btnTargetDirectoryChoose_Click);
          // 
          // shortNamesOnly
          // 
@@ -247,7 +267,7 @@
          this.ignoreDriveSpace.Location = new System.Drawing.Point(11, 199);
          this.ignoreDriveSpace.Name = "ignoreDriveSpace";
          this.ignoreDriveSpace.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-         this.ignoreDriveSpace.Size = new System.Drawing.Size(124, 17);
+         this.ignoreDriveSpace.Size = new System.Drawing.Size(125, 17);
          this.ignoreDriveSpace.TabIndex = 12;
          this.ignoreDriveSpace.Text = "Ignore &Target Space";
          this.toolTip1.SetToolTip(this.ignoreDriveSpace, "Allow to start if the reported drive space is less than the above.");
@@ -279,7 +299,7 @@
          // btnBreadStart
          // 
          this.btnBreadStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-         this.btnBreadStart.Location = new System.Drawing.Point(285, 228);
+         this.btnBreadStart.Location = new System.Drawing.Point(285, 217);
          this.btnBreadStart.Name = "btnBreadStart";
          this.btnBreadStart.Size = new System.Drawing.Size(75, 23);
          this.btnBreadStart.TabIndex = 13;
@@ -342,7 +362,7 @@
          // 
          this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-         this.textBox2.Location = new System.Drawing.Point(3, 251);
+         this.textBox2.Location = new System.Drawing.Point(3, 246);
          this.textBox2.Multiline = true;
          this.textBox2.Name = "textBox2";
          this.textBox2.ReadOnly = true;
@@ -356,7 +376,7 @@
          // btnSlicedBreadStart
          // 
          this.btnSlicedBreadStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-         this.btnSlicedBreadStart.Location = new System.Drawing.Point(284, 222);
+         this.btnSlicedBreadStart.Location = new System.Drawing.Point(285, 217);
          this.btnSlicedBreadStart.Name = "btnSlicedBreadStart";
          this.btnSlicedBreadStart.Size = new System.Drawing.Size(75, 23);
          this.btnSlicedBreadStart.TabIndex = 17;
@@ -401,13 +421,48 @@
          // button1
          // 
          this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-         this.button1.Location = new System.Drawing.Point(285, 228);
+         this.button1.Location = new System.Drawing.Point(285, 217);
          this.button1.Name = "button1";
          this.button1.Size = new System.Drawing.Size(75, 23);
          this.button1.TabIndex = 15;
          this.button1.Text = "Start";
          this.toolTip1.SetToolTip(this.button1, "Perform the scenario");
          this.button1.UseVisualStyleBackColor = true;
+         this.button1.Click += new System.EventHandler(this.button1_Click);
+         // 
+         // pictureBox1
+         // 
+         this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+         this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+         this.pictureBox1.Location = new System.Drawing.Point(677, 411);
+         this.pictureBox1.Name = "pictureBox1";
+         this.pictureBox1.Size = new System.Drawing.Size(133, 95);
+         this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+         this.pictureBox1.TabIndex = 16;
+         this.pictureBox1.TabStop = false;
+         this.toolTip1.SetToolTip(this.pictureBox1, "Wina and Bread ambigram");
+         // 
+         // button3
+         // 
+         this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+         this.button3.Location = new System.Drawing.Point(285, 52);
+         this.button3.Name = "button3";
+         this.button3.Size = new System.Drawing.Size(75, 23);
+         this.button3.TabIndex = 22;
+         this.button3.Text = "Start";
+         this.toolTip1.SetToolTip(this.button3, "Perform the scenario");
+         this.button3.UseVisualStyleBackColor = true;
+         // 
+         // button4
+         // 
+         this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+         this.button4.Location = new System.Drawing.Point(285, 209);
+         this.button4.Name = "button4";
+         this.button4.Size = new System.Drawing.Size(75, 23);
+         this.button4.TabIndex = 19;
+         this.button4.Text = "Start";
+         this.toolTip1.SetToolTip(this.button4, "Perform the scenario");
+         this.button4.UseVisualStyleBackColor = true;
          // 
          // tabBread
          // 
@@ -416,6 +471,8 @@
          this.tabBread.Controls.Add(this.tabPage1);
          this.tabBread.Controls.Add(this.tabSlicedBread);
          this.tabBread.Controls.Add(this.tabLoaves);
+         this.tabBread.Controls.Add(this.tabYEAST);
+         this.tabBread.Controls.Add(this.tabFermenter);
          this.tabBread.ImageList = this.imageTabList;
          this.tabBread.Location = new System.Drawing.Point(12, 63);
          this.tabBread.Name = "tabBread";
@@ -450,7 +507,7 @@
          // 
          this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-         this.textBox3.Location = new System.Drawing.Point(4, 257);
+         this.textBox3.Location = new System.Drawing.Point(4, 246);
          this.textBox3.Multiline = true;
          this.textBox3.Name = "textBox3";
          this.textBox3.ReadOnly = true;
@@ -490,7 +547,7 @@
          // 
          this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-         this.textBox1.Location = new System.Drawing.Point(4, 257);
+         this.textBox1.Location = new System.Drawing.Point(3, 246);
          this.textBox1.Multiline = true;
          this.textBox1.Name = "textBox1";
          this.textBox1.ReadOnly = true;
@@ -499,6 +556,45 @@
          this.textBox1.TabIndex = 14;
          this.textBox1.Text = resources.GetString("textBox1.Text");
          // 
+         // tabYEAST
+         // 
+         this.tabYEAST.Controls.Add(this.button3);
+         this.tabYEAST.Controls.Add(this.label10);
+         this.tabYEAST.Controls.Add(this.textBox4);
+         this.tabYEAST.Controls.Add(this.button4);
+         this.tabYEAST.ImageIndex = 3;
+         this.tabYEAST.Location = new System.Drawing.Point(4, 39);
+         this.tabYEAST.Name = "tabYEAST";
+         this.tabYEAST.Padding = new System.Windows.Forms.Padding(3);
+         this.tabYEAST.Size = new System.Drawing.Size(363, 387);
+         this.tabYEAST.TabIndex = 3;
+         this.tabYEAST.Text = "Y.E.A.ST.";
+         this.tabYEAST.UseVisualStyleBackColor = true;
+         // 
+         // label10
+         // 
+         this.label10.AutoSize = true;
+         this.label10.Location = new System.Drawing.Point(3, 10);
+         this.label10.Name = "label10";
+         this.label10.Size = new System.Drawing.Size(217, 13);
+         this.label10.TabIndex = 21;
+         this.label10.Text = "Simple Tests to see if the Target is writable.";
+         // 
+         // textBox4
+         // 
+         this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+         this.textBox4.Location = new System.Drawing.Point(4, 238);
+         this.textBox4.Multiline = true;
+         this.textBox4.Name = "textBox4";
+         this.textBox4.ReadOnly = true;
+         this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+         this.textBox4.Size = new System.Drawing.Size(356, 138);
+         this.textBox4.TabIndex = 20;
+         this.textBox4.Text = "YEAST = Yield Extended Attributes Set Timestamps\r\nThis test will \r\n- Create a set" +
+    " of files\r\n- Modify attributes\r\n- Modify extended attributes\r\n- Modify Timestamp" +
+    "s\r\n- Test shares to yield to another";
+         // 
          // imageTabList
          // 
          this.imageTabList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageTabList.ImageStream")));
@@ -506,6 +602,8 @@
          this.imageTabList.Images.SetKeyName(0, "Bread.ico");
          this.imageTabList.Images.SetKeyName(1, "Sliced.ico");
          this.imageTabList.Images.SetKeyName(2, "loaves.ico");
+         this.imageTabList.Images.SetKeyName(3, "Yeast.png");
+         this.imageTabList.Images.SetKeyName(4, "Ferment.png");
          // 
          // currentProcessing
          // 
@@ -517,9 +615,9 @@
          this.currentProcessing.BackgroundColor = System.Drawing.SystemColors.Control;
          this.currentProcessing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
          this.currentProcessing.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IconState,
-            this.Process,
-            this.Status});
+            this.IconStateCol,
+            this.ProcessCol,
+            this.StatusCol});
          this.currentProcessing.GridColor = System.Drawing.SystemColors.Control;
          this.currentProcessing.Location = new System.Drawing.Point(392, 85);
          this.currentProcessing.Name = "currentProcessing";
@@ -530,30 +628,30 @@
          this.currentProcessing.Size = new System.Drawing.Size(418, 326);
          this.currentProcessing.TabIndex = 12;
          // 
-         // IconState
+         // IconStateCol
          // 
-         this.IconState.FillWeight = 50F;
-         this.IconState.Frozen = true;
-         this.IconState.HeaderText = "";
-         this.IconState.MinimumWidth = 20;
-         this.IconState.Name = "IconState";
-         this.IconState.ReadOnly = true;
-         this.IconState.Width = 50;
+         this.IconStateCol.FillWeight = 50F;
+         this.IconStateCol.Frozen = true;
+         this.IconStateCol.HeaderText = "";
+         this.IconStateCol.MinimumWidth = 20;
+         this.IconStateCol.Name = "IconStateCol";
+         this.IconStateCol.ReadOnly = true;
+         this.IconStateCol.Width = 50;
          // 
-         // Process
+         // ProcessCol
          // 
-         this.Process.HeaderText = "Process";
-         this.Process.Name = "Process";
-         this.Process.ReadOnly = true;
-         this.Process.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+         this.ProcessCol.HeaderText = "Process";
+         this.ProcessCol.Name = "ProcessCol";
+         this.ProcessCol.ReadOnly = true;
+         this.ProcessCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
          // 
-         // Status
+         // StatusCol
          // 
-         this.Status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-         this.Status.HeaderText = "Status";
-         this.Status.Name = "Status";
-         this.Status.ReadOnly = true;
-         this.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+         this.StatusCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+         this.StatusCol.HeaderText = "Status";
+         this.StatusCol.Name = "StatusCol";
+         this.StatusCol.ReadOnly = true;
+         this.StatusCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
          // 
          // errorProvider1
          // 
@@ -574,28 +672,154 @@
          this.suggestAScenarioToolStripMenuItem.Name = "suggestAScenarioToolStripMenuItem";
          this.suggestAScenarioToolStripMenuItem.Size = new System.Drawing.Size(124, 20);
          this.suggestAScenarioToolStripMenuItem.Text = "Suggest a Scenario";
+         this.suggestAScenarioToolStripMenuItem.Click += new System.EventHandler(this.suggestAScenarioToolStripMenuItem_Click);
          // 
          // versionNumberToolStripMenuItem
          // 
          this.versionNumberToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-         this.versionNumberToolStripMenuItem.Enabled = false;
          this.versionNumberToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.versionNumberToolStripMenuItem.Name = "versionNumberToolStripMenuItem";
          this.versionNumberToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
          this.versionNumberToolStripMenuItem.Text = "Version Number";
          this.versionNumberToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+         this.versionNumberToolStripMenuItem.Click += new System.EventHandler(this.versionNumberToolStripMenuItem_Click);
          // 
-         // pictureBox1
+         // helpToolStripMenuItem
          // 
-         this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-         this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-         this.pictureBox1.Location = new System.Drawing.Point(677, 411);
-         this.pictureBox1.Name = "pictureBox1";
-         this.pictureBox1.Size = new System.Drawing.Size(133, 95);
-         this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-         this.pictureBox1.TabIndex = 16;
-         this.pictureBox1.TabStop = false;
-         this.toolTip1.SetToolTip(this.pictureBox1, "Wina and Bread ambigram");
+         this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+         this.helpToolStripMenuItem.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+         this.helpToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+         this.helpToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+         this.helpToolStripMenuItem.Text = "&Help";
+         this.helpToolStripMenuItem.ToolTipText = "Goto the Help page.";
+         this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+         // 
+         // tabFermenter
+         // 
+         this.tabFermenter.Controls.Add(this.fermenterDirectories);
+         this.tabFermenter.Controls.Add(this.label12);
+         this.tabFermenter.Controls.Add(this.fermenterFiles);
+         this.tabFermenter.Controls.Add(this.fileStart);
+         this.tabFermenter.Controls.Add(this.label11);
+         this.tabFermenter.Controls.Add(this.textBox5);
+         this.tabFermenter.Controls.Add(this.dirStart);
+         this.tabFermenter.ImageIndex = 4;
+         this.tabFermenter.Location = new System.Drawing.Point(4, 39);
+         this.tabFermenter.Name = "tabFermenter";
+         this.tabFermenter.Padding = new System.Windows.Forms.Padding(3);
+         this.tabFermenter.Size = new System.Drawing.Size(363, 387);
+         this.tabFermenter.TabIndex = 4;
+         this.tabFermenter.Text = "Fermenter";
+         this.tabFermenter.UseVisualStyleBackColor = true;
+         // 
+         // fileStart
+         // 
+         this.fileStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+         this.fileStart.Location = new System.Drawing.Point(282, 5);
+         this.fileStart.Name = "fileStart";
+         this.fileStart.Size = new System.Drawing.Size(75, 24);
+         this.fileStart.TabIndex = 26;
+         this.fileStart.Text = "Start";
+         this.toolTip1.SetToolTip(this.fileStart, "Perform the scenario");
+         this.fileStart.UseVisualStyleBackColor = true;
+         this.fileStart.Click += new System.EventHandler(this.fileStart_Click);
+         // 
+         // label11
+         // 
+         this.label11.AutoSize = true;
+         this.label11.Location = new System.Drawing.Point(3, 10);
+         this.label11.Name = "label11";
+         this.label11.Size = new System.Drawing.Size(130, 13);
+         this.label11.TabIndex = 25;
+         this.label11.Text = "&Number of files to create:";
+         // 
+         // textBox5
+         // 
+         this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+         this.textBox5.Location = new System.Drawing.Point(4, 238);
+         this.textBox5.Multiline = true;
+         this.textBox5.Name = "textBox5";
+         this.textBox5.ReadOnly = true;
+         this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+         this.textBox5.Size = new System.Drawing.Size(356, 138);
+         this.textBox5.TabIndex = 24;
+         this.textBox5.Text = resources.GetString("textBox5.Text");
+         // 
+         // dirStart
+         // 
+         this.dirStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+         this.dirStart.Location = new System.Drawing.Point(282, 138);
+         this.dirStart.Name = "dirStart";
+         this.dirStart.Size = new System.Drawing.Size(75, 24);
+         this.dirStart.TabIndex = 23;
+         this.dirStart.Text = "Start";
+         this.toolTip1.SetToolTip(this.dirStart, "Perform the scenario");
+         this.dirStart.UseVisualStyleBackColor = true;
+         // 
+         // fermenterFiles
+         // 
+         this.fermenterFiles.Increment = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+         this.fermenterFiles.Location = new System.Drawing.Point(139, 8);
+         this.fermenterFiles.Maximum = new decimal(new int[] {
+            -1879048193,
+            0,
+            0,
+            0});
+         this.fermenterFiles.Minimum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+         this.fermenterFiles.Name = "fermenterFiles";
+         this.fermenterFiles.Size = new System.Drawing.Size(120, 21);
+         this.fermenterFiles.TabIndex = 27;
+         this.fermenterFiles.Value = new decimal(new int[] {
+            36864,
+            0,
+            0,
+            0});
+         // 
+         // fermenterDirectories
+         // 
+         this.fermenterDirectories.Increment = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+         this.fermenterDirectories.Location = new System.Drawing.Point(139, 140);
+         this.fermenterDirectories.Maximum = new decimal(new int[] {
+            -1879048193,
+            0,
+            0,
+            0});
+         this.fermenterDirectories.Minimum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+         this.fermenterDirectories.Name = "fermenterDirectories";
+         this.fermenterDirectories.Size = new System.Drawing.Size(120, 21);
+         this.fermenterDirectories.TabIndex = 29;
+         this.fermenterDirectories.Value = new decimal(new int[] {
+            36864,
+            0,
+            0,
+            0});
+         // 
+         // label12
+         // 
+         this.label12.AutoSize = true;
+         this.label12.Location = new System.Drawing.Point(3, 142);
+         this.label12.Name = "label12";
+         this.label12.Size = new System.Drawing.Size(115, 13);
+         this.label12.TabIndex = 28;
+         this.label12.Text = "Number of &Directories:";
          // 
          // WinAFRED
          // 
@@ -629,16 +853,20 @@
          this.tabLoaves.ResumeLayout(false);
          this.tabLoaves.PerformLayout();
          ((System.ComponentModel.ISupportInitialize)(this.pooledThreads)).EndInit();
+         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
          this.tabBread.ResumeLayout(false);
          this.tabPage1.ResumeLayout(false);
          this.tabPage1.PerformLayout();
          this.tabSlicedBread.ResumeLayout(false);
          this.tabSlicedBread.PerformLayout();
+         this.tabYEAST.ResumeLayout(false);
+         this.tabYEAST.PerformLayout();
          ((System.ComponentModel.ISupportInitialize)(this.currentProcessing)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-         this.menuStrip1.ResumeLayout(false);
-         this.menuStrip1.PerformLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+         this.tabFermenter.ResumeLayout(false);
+         this.tabFermenter.PerformLayout();
+         ((System.ComponentModel.ISupportInitialize)(this.fermenterFiles)).EndInit();
+         ((System.ComponentModel.ISupportInitialize)(this.fermenterDirectories)).EndInit();
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -650,7 +878,6 @@
       private System.Windows.Forms.ToolTip toolTip1;
       private System.Windows.Forms.TextBox targetDirectory;
       private System.Windows.Forms.Button btnTargetDirectoryChoose;
-      private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
       private System.Windows.Forms.TabControl tabBread;
       private System.Windows.Forms.TabPage tabSlicedBread;
       private System.Windows.Forms.TabPage tabLoaves;
@@ -681,13 +908,27 @@
       private System.Windows.Forms.TextBox textBox3;
       private System.Windows.Forms.Button button1;
       private System.Windows.Forms.ImageList imageTabList;
-      private System.Windows.Forms.DataGridViewImageColumn IconState;
-      private System.Windows.Forms.DataGridViewTextBoxColumn Process;
-      private System.Windows.Forms.DataGridViewTextBoxColumn Status;
       private System.Windows.Forms.MenuStrip menuStrip1;
       private System.Windows.Forms.ToolStripMenuItem versionNumberToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem suggestAScenarioToolStripMenuItem;
       private System.Windows.Forms.PictureBox pictureBox1;
+      private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+      private System.Windows.Forms.DataGridViewImageColumn IconStateCol;
+      private System.Windows.Forms.DataGridViewTextBoxColumn ProcessCol;
+      private System.Windows.Forms.DataGridViewTextBoxColumn StatusCol;
+      private System.Windows.Forms.TabPage tabYEAST;
+      private System.Windows.Forms.Button button3;
+      private System.Windows.Forms.Label label10;
+      private System.Windows.Forms.TextBox textBox4;
+      private System.Windows.Forms.Button button4;
+      private System.Windows.Forms.TabPage tabFermenter;
+      private System.Windows.Forms.NumericUpDown fermenterDirectories;
+      private System.Windows.Forms.Label label12;
+      private System.Windows.Forms.NumericUpDown fermenterFiles;
+      private System.Windows.Forms.Button fileStart;
+      private System.Windows.Forms.Label label11;
+      private System.Windows.Forms.TextBox textBox5;
+      private System.Windows.Forms.Button dirStart;
    }
 }
 
