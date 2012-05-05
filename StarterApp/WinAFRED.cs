@@ -25,15 +25,17 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using Elucidate;
 using LiquesceSvc;
 using NLog;
-using StarterApp.Tests;
 
 namespace StarterApp
 {
@@ -52,6 +54,14 @@ namespace StarterApp
          });
 
          versionNumberToolStripMenuItem.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+         if (Properties.Settings.Default.UpdateRequired)
+         {
+            // Thanks go to http://cs.rthand.com/blogs/blog_with_righthand/archive/2005/12/09/246.aspx
+            Properties.Settings.Default.Upgrade();
+            Properties.Settings.Default.UpdateRequired = false;
+            Properties.Settings.Default.Save();
+         }
+         WindowLocation.GeometryFromString(Properties.Settings.Default.WindowLocation, this);
       }
 
       private void suggestAScenarioToolStripMenuItem_Click(object sender, EventArgs e)
@@ -189,9 +199,105 @@ namespace StarterApp
          //}
       }
 
-      private void fileStart_Click(object sender, EventArgs e)
+      /// <summary>
+      /// Perform the tidy ups
+      /// </summary>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>
+      private void WinAFRED_FormClosing(object sender, FormClosingEventArgs e)
       {
-         Fermenter.CreateFiles(targetDirectory.Text, (Int64) fermenterFiles.Value);
+         // persist our geometry string.
+         Properties.Settings.Default.WindowLocation = WindowLocation.GeometryToString(this);
+         Properties.Settings.Default.Save();
+
+         removeFiles_Click(sender, e);
+         removeDirectories_Click(sender, e);
       }
+
+      private Stopwatch stopWatch;
+      private void StartProcessing()
+      {
+         currentProcessing.Clear();
+         Application.DoEvents();
+         UseWaitCursor = true;
+         Enabled = false;
+         stopWatch = Stopwatch.StartNew();
+      }
+
+      private void EndProcessing()
+      {
+         stopWatch.Stop();
+         Enabled = true;
+         UseWaitCursor = false;
+         progressBar1.Value = 0;
+         // Get the elapsed time as a TimeSpan value.
+         timeTaken.Text = string.Format("{0:c}", stopWatch.Elapsed);
+      }
+
+      private void timer1_Tick(object sender, EventArgs e)
+      {
+         try
+         {
+            if (logs.Count <= 0)
+               return;
+            // Now lock in case the timer is overlapping !
+            lock (this)
+            {
+               currentProcessing._Paint = false; // turn off flag to ignore WM_PAINT messages
+               //read out of the file until the EOF
+               while (logs.Count > 0)
+               {
+                  int textLength = textBox1.TextLength;
+                  textBox1.Select(textLength, 0);
+                  LogString log = logs.Dequeue();
+                  switch (log.LevelUppercase)
+                  {
+                     case "FATAL":
+                        currentProcessing.SelectionColor = Color.DarkViolet;
+                        break;
+                     case "ERROR":
+                        currentProcessing.SelectionColor = Color.Red;
+                        break;
+                     case "WARN":
+                        currentProcessing.SelectionColor = Color.RoyalBlue;
+                        break;
+                     case "INFO":
+                        currentProcessing.SelectionColor = Color.Black;
+                        break;
+                     case "DEBUG":
+                        currentProcessing.SelectionColor = Color.DarkGray;
+                        break;
+                     case "TRACE":
+                        currentProcessing.SelectionColor = Color.DimGray;
+                        break;
+                     default:
+                        // Leave it as is
+                        break;
+                  }
+                  currentProcessing.AppendText(log.Message + Environment.NewLine);
+               }
+            }
+         }
+         catch { }
+         currentProcessing._Paint = true;// restore flag so we can paint the control
+      }
+
+      private class LogString
+      {
+         public string LevelUppercase;
+         public string Message;
+      };
+
+      static private readonly Queue<LogString> logs = new Queue<LogString>();
+      public static void LogMethod(string levelUppercase, string message)
+      {
+         logs.Enqueue(new LogString
+         {
+            LevelUppercase = levelUppercase,
+            Message = message
+         });
+      }
+
+
    }
 }

@@ -7,8 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarterApp", "StarterApp\St
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdParty", "ThirdParty", "{EF216E08-2D27-4149-992F-288DFC324239}"
 	ProjectSection(SolutionItems) = preProject
+		ThirdParty\FlickerFreeRichEditTextBox.cs = ThirdParty\FlickerFreeRichEditTextBox.cs
 		ThirdParty\NLog.dll = ThirdParty\NLog.dll
+		ThirdParty\TemporaryDirectory.cs = ThirdParty\TemporaryDirectory.cs
 		ThirdParty\TemporaryFile.cs = ThirdParty\TemporaryFile.cs
+		ThirdParty\WindowLocation.cs = ThirdParty\WindowLocation.cs
 	EndProjectSection
 EndProject
 Global

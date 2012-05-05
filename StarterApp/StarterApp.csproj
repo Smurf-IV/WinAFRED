@@ -84,6 +84,9 @@
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Bread.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="NLog">
       <HintPath>..\ThirdParty\NLog.dll</HintPath>
@@ -101,12 +104,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\ThirdParty\FlickerFreeRichEditTextBox.cs">
+      <Link>FlickerFreeRichEditTextBox.cs</Link>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="..\ThirdParty\TemporaryDirectory.cs">
+      <Link>TemporaryDirectory.cs</Link>
+    </Compile>
     <Compile Include="..\ThirdParty\TemporaryFile.cs">
       <Link>TemporaryFile.cs</Link>
     </Compile>
+    <Compile Include="..\ThirdParty\WindowLocation.cs">
+      <Link>WindowLocation.cs</Link>
+    </Compile>
     <Compile Include="NativeFileOps.cs" />
     <Compile Include="Tests\Bread.cs" />
-    <Compile Include="Tests\Fermenter.cs" />
+    <Compile Include="Tests\Fermenter.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Tests\Loaves.cs" />
     <Compile Include="Tests\SlicedBread.cs" />
     <Compile Include="WinAFRED.cs">
@@ -166,6 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\WinAFRED.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Bread.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
