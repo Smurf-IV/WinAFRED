@@ -113,19 +113,19 @@ namespace Thirdparty
       /// Use this in an attempt to cache in memory.
       /// </summary>
       /// <param name="shortLived"></param>
-      /// <param name="fi"> </param>
-      /// <returns></returns>
-      private static FileStream CreateTemporaryFile(bool shortLived, FileInfo fi)
+      /// <param name="newInfo"> </param>
+      /// <returns>FileStream</returns>
+      private static FileStream CreateTemporaryFile(bool shortLived, FileInfo newInfo)
       {
-         FileStream fs = fi.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
-         FileAttributes attributes = fi.Attributes;
+         FileStream fs = newInfo.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+         FileAttributes attributes = newInfo.Attributes;
          if (shortLived)
          {
             // Set the temporary attribute
             attributes |= FileAttributes.Temporary;
          }
          attributes |= FileAttributes.NotContentIndexed;
-         fi.Attributes = attributes;
+         newInfo.Attributes = attributes;
 
          return fs;
       }

@@ -538,7 +538,7 @@ This test will
   <data name="textBox5.Text" xml:space="preserve">
     <value>The Fermenter creates the specified number of files and the specified number of directories.
 
-This will test to make sue the the FileSystems are capable of returning that number from queries.
+This will test to make sure the the FileSystems are capable of returning that number from queries.
 The files should be tidied up after the program exits.</value>
   </data>
   <metadata name="imageTabList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -549,7 +549,7 @@ The files should be tidied up after the program exits.</value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB6
-        TQAAAk1TRnQBSQFMAgEBBQEAAegBAAHoAQABIAEAASABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAGA
+        TQAAAk1TRnQBSQFMAgEBBQEAAfABAAHwAQABIAEAASABAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAGA
         AwABQAMAAQEBAAEYBgABYBIAAwUDBgELAgkBlwGOAY8BlQGSAZQBkwGSAZQCkgGUAYABiQGNAXgBgQGK
         AXQBgAGGAYcBlQGaAZABnAGgAYgBlAGaAX0BkAGYAX4BjwGYAZcBogGmAZUBoQGnAXMBhgGSAZQBoAGl
         AZwBqAGtAZQBpAGrAZIBogGoAZYBogGoAZEBowGqAZYBpQGtAZwBqgGwAakBtQG5AaABrAGwAbMBvgHC

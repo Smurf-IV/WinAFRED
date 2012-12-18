@@ -112,15 +112,15 @@ namespace Thirdparty
       /// </summary>
       /// <param name="directoryName"> </param>
       /// <param name="di"> </param>
-      /// <returns></returns>
+      /// <returns>newInfo</returns>
       private static DirectoryInfo CreateTemporaryDirectory(string directoryName, DirectoryInfo di)
       {
-         DirectoryInfo fs = di.CreateSubdirectory(directoryName);
-         FileAttributes attributes = di.Attributes;
+         DirectoryInfo newInfo = di.CreateSubdirectory(directoryName);
+         FileAttributes attributes = newInfo.Attributes;
          attributes |= FileAttributes.NotContentIndexed;
-         di.Attributes = attributes;
+         newInfo.Attributes = attributes;
 
-         return di;
+         return newInfo;
       }
    }
 }

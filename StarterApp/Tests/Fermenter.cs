@@ -56,7 +56,7 @@ namespace StarterApp
                {
                   Log.Info("New file [{0}]", i);
                   progressBar1.PerformStep();
-                  tempFiles.Add(new TemporaryFile(targetDirectory.Text, string.Format("{0:g8}.tmp", i), true));
+                  tempFiles.Add(new TemporaryFile(targetDirectory.Text, i+".tmp", true));
                }
             }
          }
@@ -108,9 +108,9 @@ namespace StarterApp
                progressBar1.Value = count;
                for (int i = count + 1; i <= newDirs; i++)
                {
-                  Log.Info("New directory [{0]}]", i);
+                  Log.Info("New directory [{0}]", i);
                   progressBar1.PerformStep();
-                  tempDirs.Add(new TemporaryDirectory(targetDirectory.Text, string.Format("{0:g8}", i)));
+                  tempDirs.Add(new TemporaryDirectory(targetDirectory.Text, i+"tmp"));
                }
             }
          }

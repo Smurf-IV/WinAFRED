@@ -218,7 +218,6 @@ namespace StarterApp
       private void StartProcessing()
       {
          currentProcessing.Clear();
-         Application.DoEvents();
          UseWaitCursor = true;
          Enabled = false;
          stopWatch = Stopwatch.StartNew();
@@ -241,7 +240,7 @@ namespace StarterApp
             if (logs.Count <= 0)
                return;
             // Now lock in case the timer is overlapping !
-            lock (this)
+            lock (logs)
             {
                currentProcessing._Paint = false; // turn off flag to ignore WM_PAINT messages
                //read out of the file until the EOF
