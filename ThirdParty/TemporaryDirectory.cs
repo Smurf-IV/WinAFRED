@@ -8,9 +8,9 @@ namespace Thirdparty
    /// and then had some modifications to allow attributes and filestream usage
    /// </summary>
    /// <example>
-   /// using (TemporaryFile temporaryFile = new TemporaryFile(true)) 
+   /// using (TemporaryDirectory temporaryDir = new TemporaryDirectory(true)) 
    /// { 
-   ///    temporaryFile.Keep = true; 
+   ///    temporaryDir.Keep = true; 
    /// }
    /// </example>
    public class TemporaryDirectory : IDisposable
